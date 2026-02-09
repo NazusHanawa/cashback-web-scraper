@@ -23,7 +23,7 @@ cashback_scrapper.set_old_cashbacks(db.get_last_cashbacks())
 first_time = time.time()
 scrap_count = 0
 while True:
-    scrap_count += 1
+    
     print(f"\nScrapping {scrap_count}: {time.time() - first_time:.0f}")
     
     new_cashbacks = cashback_scrapper.get_new_cashbacks()
@@ -33,3 +33,4 @@ while True:
         db.update_old_cashbacks_date_end(cashback_scrapper.get_old_cashbacks())
     
     # time.sleep(30)
+    scrap_count += 1

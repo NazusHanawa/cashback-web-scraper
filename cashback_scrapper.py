@@ -22,17 +22,36 @@ class CashabackScrapper:
             exit()
             
         soup = BeautifulSoup(response.text, "html.parser")
-        cashback_part = soup.select_one(partnership["selector"])
-        if cashback_part:
-            cashback_find = re.search(r"\d+[.,]?\d*%", cashback_part.text)
-            if cashback_find:
-                cashback_value = float(cashback_find.group().replace("%", "").replace(",", "."))
-            else:
-                cashback_value = 0
+        main_selector = partnership["selector"]
+        
+        cashback_element = soup.select_one(main_selector)
+        cashback_value = 0
+        
+        if cashback_element:
+            found_pattern = re.search(r"\d+[.,]?\d*%", cashback_element.text)
+            if found_pattern:
+                cashback_value = float(found_pattern.group().replace("%", "").replace(",", "."))
         else:
-            print(f"BOT DETECTED: {partnership["url"]}")
-            self.get_cashback(partnership)
-            return False
+            print(f"DIRECT CASHBACK NOT FOUND: {partnership['url']}")
+
+            selector_parts = [part.strip() for part in main_selector.split('>')]
+    
+            while len(selector_parts) > 2:
+                selector_parts.pop()
+                current_reduced_selector = " > ".join(selector_parts)
+
+                reduced_element = soup.select_one(current_reduced_selector)
+
+                if reduced_element:
+                    found_pattern = re.search(r"\d+[.,]?\d*%", reduced_element.get_text())
+                    if found_pattern:
+                        cashback_value = float(found_pattern.group().replace("%", "").replace(",", "."))
+                        print(f"ALTERNATIVE VALUE FOUND: {cashback_value}")
+                        break
+            else:
+                print("BOT DETECTED")
+                return False
+        
         
         cashback = {
             "partnership_id": partnership["id"],

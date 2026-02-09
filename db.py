@@ -137,7 +137,7 @@ class DB:
                 GROUP BY partnership_id
                 HAVING id = MAX(id)
             )
-            WHERE diff_hours <= 6
+            WHERE diff_hours <= 24
         );
         """
         
