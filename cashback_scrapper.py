@@ -19,7 +19,6 @@ class CashabackScrapper:
         if response.status_code != 200:
             print(f"ERRO: {response.status_code} --> {partnership["url"]}")
             print(f"{partnership["url"]}")
-            exit()
             
         soup = BeautifulSoup(response.text, "html.parser")
         main_selector = partnership["selector"]

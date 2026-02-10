@@ -50,7 +50,7 @@ class DB:
         self.cursor.executemany("INSERT OR IGNORE INTO platforms (name, url, cashback_value_path, cashback_description_path) VALUES (?, ?, ?, ?);", platforms_tuples)
         self.commit()
     
-    def create_partners(self, js=False):
+    def create_partners(self):
         print("CREATING PARTNERS...")
 
         stores = self.cursor.execute("SELECT * FROM stores").fetchall()

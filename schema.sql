@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS platforms (
     name TEXT UNIQUE NOT NULL,
     url TEXT,
     cashback_value_path TEXT,
-    cashback_description_path TEXTF
+    cashback_description_path TEXT
 );
 
 CREATE TABLE IF NOT EXISTS partnerships (

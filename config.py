@@ -36,4 +36,13 @@ PLATFORMS = [
         "cashback_value_path": "#retailerPage > div:nth-child(1) > div.container.p-0.bg-white.elevated > div.row.m-0.ret-header-first-row > div.py-3.col-12.col-md-4.retailer-header-logo-cont.d-flex.justify-content-center.align-items-center.flex-column.h-100 > h3",
         "cashback_description_path": None
     }
+    # Banco Pan
+    # Zoom
+    # Buscape
+    # Opera
+    # Letyshops
+    # Mega Bonus
+    
+    # Nubank
+    # PicPay
 ]
